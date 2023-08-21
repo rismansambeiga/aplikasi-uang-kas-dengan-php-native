@@ -1,9 +1,9 @@
 <?php 
   $dataUser = dataUser();
-  $jml_pengeluaran = mysqli_fetch_assoc(mysqli_query($conn, "SELECT sum(jumlah_pengeluaran) as jml_pengeluaran FROM pengeluaran"));
+  $jml_pengeluaran = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(jumlah_pengeluaran) as jml_pengeluaran FROM pengeluaran"));
   $jml_pengeluaran = $jml_pengeluaran['jml_pengeluaran'];
 
-  $jml_uang_kas = mysqli_fetch_assoc(mysqli_query($conn, "SELECT sum(minggu_ke_1 + minggu_ke_2 + minggu_ke_3 + minggu_ke_4) as jml_uang_kas FROM uang_kas"));
+  $jml_uang_kas = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(minggu_ke_1 + minggu_ke_2 + minggu_ke_3 + minggu_ke_4) as jml_uang_kas FROM uang_kas"));
   $jml_uang_kas = $jml_uang_kas['jml_uang_kas'];
 ?>
 <!-- Main Sidebar Container -->
