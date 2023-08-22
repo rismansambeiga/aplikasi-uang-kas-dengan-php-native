@@ -61,7 +61,7 @@
         <li class="nav-item">
           <a href="anggota.php" class="nav-link">
             <i class="fas fa-user-tie nav-icon"></i>
-            <p>Siswa</p>
+            <p>Anggota</p>
           </a>
         </li>
         <li class="nav-item">

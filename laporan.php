@@ -1,6 +1,8 @@
 <?php 
   require 'connection.php';
+
   checkLogin();
+	
   $bulan_pembayaran = mysqli_query($conn, "SELECT * FROM bulan_pembayaran ORDER BY id_bulan_pembayaran DESC");
   if (isset($_POST['btnLaporanPemasukkan'])) {
   	$id_bulan_pembayaran = htmlspecialchars($_POST['id_bulan_pembayaran']);
@@ -122,7 +124,7 @@
 											<thead>
 												<tr>
 													<th>No.</th>
-													<th>Nama Siswa</th>
+													<th>Nama Anggota</th>
 													<th>Minggu Ke-1</th>
 													<th>Minggu Ke-2</th>
 													<th>Minggu Ke-3</th>

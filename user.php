@@ -1,6 +1,8 @@
 <?php 
   require 'connection.php';
+  
   checkLogin();
+
   $user = mysqli_query($conn, "SELECT * FROM user INNER JOIN jabatan ON user.id_jabatan = jabatan.id_jabatan");
   $jabatan = mysqli_query($conn, "SELECT * FROM jabatan");
   if (isset($_POST['btnEditUser'])) {

@@ -1,6 +1,8 @@
 <?php 
   require 'connection.php';
+	
   checkLogin();
+	
   $jabatan = mysqli_query($conn, "SELECT * FROM jabatan");
 
   if (isset($_POST['btnEditProfile'])) {

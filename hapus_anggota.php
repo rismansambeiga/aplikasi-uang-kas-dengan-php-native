@@ -3,7 +3,7 @@
 	$id_anggota = $_GET['id_anggota'];
 	if (isset($id_anggota)) {
 		if (deleteSiswa($id_anggota) > 0) {
-			setAlert("Siswa has been deleted", "Successfully deleted", "success");
+			setAlert("Anggota has been deleted", "Successfully deleted", "success");
 		    header("Location: anggota.php");
 	    }
 	} else {

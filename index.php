@@ -1,6 +1,8 @@
 <?php 
   require 'connection.php';
+  
   checkLogin();
+
   $jml_siswa = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(id_anggota) as jml_siswa FROM anggota"));
   $jml_siswa = $jml_siswa['jml_siswa'];
 
@@ -71,8 +73,8 @@
               <div class="col-lg-4">
                 <div class="card shadow">
                   <div class="card-body">
-                    <h5><i class="fas fa-fw fa-user-tie"></i> Siswa</h5>
-                    <h6 class="text-muted">Jumlah Siswa: <?= $jml_siswa; ?></h6>
+                    <h5><i class="fas fa-fw fa-user-tie"></i> Anggota</h5>
+                    <h6 class="text-muted">Jumlah Anggota: <?= $jml_siswa; ?></h6>
                     <a href="anggota.php" class="btn btn-info">Detail<i class="fas fa-fw fa-align-justify"></i></a>
                   </div>
                 </div>

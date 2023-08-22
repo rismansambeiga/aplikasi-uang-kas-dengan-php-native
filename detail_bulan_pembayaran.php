@@ -1,6 +1,8 @@
 <?php 
   require 'connection.php';
+  
   checkLogin();
+
   $id_bulan_pembayaran = $_GET['id_bulan_pembayaran'];
   $detail_bulan_pembayaran = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM bulan_pembayaran WHERE id_bulan_pembayaran = '$id_bulan_pembayaran'"));
   $anggota = mysqli_query($conn, "SELECT * FROM anggota ORDER BY nama_anggota ASC");
@@ -28,7 +30,7 @@
 
   if (isset($_POST['btnTambahSiswa'])) {
     if (tambahSiswaUangKas($_POST) > 0) {
-      setAlert("Siswa has been added", "Successfully added", "success");
+      setAlert("Anggota has been added", "Successfully added", "success");
       header("Location: detail_bulan_pembayaran.php?id_bulan_pembayaran=$id_bulan_pembayaran");
     }
   }
@@ -60,7 +62,7 @@
           </div><!-- /.col -->
           <div class="col-sm text-right">
             <?php if ($_SESSION['id_jabatan'] !== '3'): ?>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahSiswaModal"><i class="fas fa-fw fa-plus"></i> Tambah Siswa</button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahSiswaModal"><i class="fas fa-fw fa-plus"></i> Tambah Anggota</button>
             <?php endif ?>
           </div>
         </div><!-- /.row -->
@@ -76,7 +78,7 @@
             <thead>
               <tr>
                 <th>No.</th>
-                <th>Nama Siswa</th>
+                <th>Nama Anggota</th>
                 <th>Minggu ke 1</th>
                 <th>Minggu ke 2</th>
                 <th>Minggu ke 3</th>
@@ -317,14 +319,14 @@
         <input type="hidden" name="id_bulan_pembayaran" value="<?= $id_bulan_pembayaran; ?>">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="tambahSiswaModalLabel">Tambah Siswa</h5>
+            <h5 class="modal-title" id="tambahSiswaModalLabel">Tambah Anggota</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <div class="form-group">
-              <label for="id_anggota">Nama Siswa</label>
+              <label for="id_anggota">Nama Anggota</label>
               <select name="id_anggota" id="id_anggota" class="form-control">
                 <?php foreach ($siswa_baru as $dsb): ?>
                   <option value="<?= $dsb['id_anggota']; ?>"><?= $dsb['nama_anggota']; ?></option>

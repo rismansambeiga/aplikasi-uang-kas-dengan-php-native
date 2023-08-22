@@ -1,17 +1,19 @@
 <?php 
   require 'connection.php';
+
   checkLogin();
+
   $anggota = mysqli_query($conn, "SELECT * FROM anggota ORDER BY nama_anggota ASC");
   if (isset($_POST['btnEditSiswa'])) {
     if (editSiswa($_POST) > 0) {
-      setAlert("Siswa has been changed", "Successfully changed", "success");
+      setAlert("Anggota has been changed", "Successfully changed", "success");
       header("Location: anggota.php");
     }
   }
 
   if (isset($_POST['btnTambahSiswa'])) {
     if (addSiswa($_POST) > 0) {
-      setAlert("Siswa has been added", "Successfully added", "success");
+      setAlert("Anggota has been added", "Successfully added", "success");
       header("Location: anggota.php");
     }
   }
@@ -31,7 +33,7 @@
 <html>
   <head>
     <?php include 'include/css.php'; ?>
-    <title>Siswa</title>
+    <title>Anggota</title>
   </head>
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -47,25 +49,25 @@
           <div class="container-fluid">
             <div class="row justify-content-center mb-2">
               <div class="col-sm text-left">
-                <h1 class="m-0 text-dark">Siswa</h1>
+                <h1 class="m-0 text-dark">Anggota</h1>
               </div><!-- /.col -->
               <div class="col-sm text-right">
                 <?php if ($_SESSION['id_jabatan'] !== '3'): ?>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahSiswaModal"><i class="fas fa-fw fa-plus"></i> Tambah Siswa</button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahSiswaModal"><i class="fas fa-fw fa-plus"></i> Tambah Anggota</button>
                   <!-- Modal -->
                   <div class="modal fade text-left" id="tambahSiswaModal" tabindex="-1" role="dialog" aria-labelledby="tambahSiswaModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <form method="post">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="tambahSiswaModalLabel">Tambah Siswa</h5>
+                            <h5 class="modal-title" id="tambahSiswaModalLabel">Tambah Anggota</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                           <div class="modal-body">
                             <div class="form-group">
-                              <label for="nama_anggota">Nama Siswa</label>
+                              <label for="nama_anggota">Nama Anggota</label>
                               <input type="text" id="nama_anggota" name="nama_anggota" class="form-control" required>
                             </div>
                             <div class="form-group">
@@ -107,7 +109,7 @@
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>Nama Siswa</th>
+                        <th>Nama Anggota</th>
                         <th>Jenis Kelamin</th>
                         <th>No. Telepon</th>
                         <th>Email</th>
@@ -138,14 +140,14 @@
                                     <input type="hidden" name="id_anggota" value="<?= $ds['id_anggota']; ?>">
                                     <div class="modal-content">
                                       <div class="modal-header">
-                                        <h5 class="modal-title" id="editSiswaModalLabel<?= $ds['id_anggota']; ?>">Ubah Siswa</h5>
+                                        <h5 class="modal-title" id="editSiswaModalLabel<?= $ds['id_anggota']; ?>">Ubah Anggota</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                         </button>
                                       </div>
                                       <div class="modal-body">
                                         <div class="form-group">
-                                          <label for="nama_anggota<?= $ds['id_anggota']; ?>">Nama Siswa</label>
+                                          <label for="nama_anggota<?= $ds['id_anggota']; ?>">Nama Anggota</label>
                                           <input type="text" id="nama_anggota<?= $ds['id_anggota']; ?>" value="<?= $ds['nama_anggota']; ?>" name="nama_anggota" class="form-control" required>
                                         </div>
                                         <div class="form-group">
@@ -176,7 +178,7 @@
                                 </div>
                               </div>
                               <?php if ($_SESSION['id_jabatan'] == '1'): ?>
-                                <a data-nama="<?= $ds['nama_anggota']; ?>" class="btn-delete badge badge-danger" href="hapus_siswa.php?id_anggota=<?= $ds['id_anggota']; ?>"><i class="fas fa-fw fa-trash"></i> Hapus</a>
+                                <a data-nama="<?= $ds['nama_anggota']; ?>" class="btn-delete badge badge-danger" href="hapus_anggota.php?id_anggota=<?= $ds['id_anggota']; ?>"><i class="fas fa-fw fa-trash"></i> Hapus</a>
                               <?php endif ?>
                             </td>
                           <?php endif ?>

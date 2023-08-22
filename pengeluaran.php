@@ -1,6 +1,8 @@
 <?php 
   require 'connection.php';
+  
   checkLogin();
+  
   $pengeluaran = mysqli_query($conn, "SELECT * FROM pengeluaran INNER JOIN user ON pengeluaran.id_user = user.id_user");
 
   if (isset($_POST['btnAddPengeluaran'])) {
