@@ -114,7 +114,7 @@
               <?php foreach ($bulan_pembayaran as $dbp): ?>
                 <?php 
                   $id_bulan_pembayaran = $dbp['id_bulan_pembayaran'];
-                  $total_uang_kas_bulan_ini = mysqli_fetch_assoc(mysqli_query($conn, "SELECT sum(minggu_ke_1 + minggu_ke_2 + minggu_ke_3 + minggu_ke_4) as total_uang_kas_bulan_ini FROM uang_kas WHERE id_bulan_pembayaran = '$id_bulan_pembayaran'"));
+                  $total_uang_kas_bulan_ini = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(minggu_ke_1 + minggu_ke_2 + minggu_ke_3 + minggu_ke_4) as total_uang_kas_bulan_ini FROM uang_kas WHERE id_bulan_pembayaran = '$id_bulan_pembayaran'"));
                   $total_uang_kas_bulan_ini = $total_uang_kas_bulan_ini['total_uang_kas_bulan_ini'];
                 ?>
                 <div class="col-lg-3">

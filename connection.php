@@ -156,30 +156,30 @@ function deleteUser($id) {
 
 function addSiswa($data) {
 	global $conn;
-	$nama_siswa = htmlspecialchars($data['nama_siswa']);
+	$nama_anggota = htmlspecialchars($data['nama_anggota']);
 	$jenis_kelamin = htmlspecialchars($data['jenis_kelamin']);
 	$no_telepon = htmlspecialchars($data['no_telepon']);
 	$email = htmlspecialchars($data['email']);
-	$query = mysqli_query($conn, "INSERT INTO siswa VALUES ('', '$nama_siswa', '$jenis_kelamin', '$no_telepon', '$email')");
+	$query = mysqli_query($conn, "INSERT INTO anggota VALUES ('', '$nama_anggota', '$jenis_kelamin', '$no_telepon', '$email')");
   	return mysqli_affected_rows($conn);
 }
 
 function deleteSiswa($id) {
 	global $conn;
 	if (checkJabatan() == true) {
-		$query = mysqli_query($conn, "DELETE FROM siswa WHERE id_siswa = '$id'");
+		$query = mysqli_query($conn, "DELETE FROM anggota WHERE id_anggota = '$id'");
 	  	return mysqli_affected_rows($conn);
 	}
 }
 
 function editSiswa($data) {
 	global $conn;
-	$id_siswa = htmlspecialchars($data['id_siswa']);
-	$nama_siswa = htmlspecialchars($data['nama_siswa']);
+	$id_anggota = htmlspecialchars($data['id_anggota']);
+	$nama_anggota = htmlspecialchars($data['nama_anggota']);
 	$jenis_kelamin = htmlspecialchars($data['jenis_kelamin']);
 	$no_telepon = htmlspecialchars($data['no_telepon']);
 	$email = htmlspecialchars($data['email']);
-	$query = mysqli_query($conn, "UPDATE siswa SET nama_siswa = '$nama_siswa', jenis_kelamin = '$jenis_kelamin', no_telepon = '$no_telepon', email = '$email' WHERE id_siswa = '$id_siswa'");
+	$query = mysqli_query($conn, "UPDATE anggota SET nama_anggota = '$nama_anggota', jenis_kelamin = '$jenis_kelamin', no_telepon = '$no_telepon', email = '$email' WHERE id_anggota = '$id_anggota'");
   	return mysqli_affected_rows($conn);
 }
 
@@ -197,14 +197,14 @@ function addBulanPembayaran($data) {
 		$query = mysqli_query($conn, "INSERT INTO bulan_pembayaran VALUES ('', '$nama_bulan', '$tahun', '$pembayaran_perminggu')");
 		$id_bulan_pembayaran = mysqli_insert_id($conn);
 
-		$dataSiswa = mysqli_query($conn, "SELECT * FROM siswa");
-		$siswa = "INSERT INTO uang_kas (id_siswa, id_bulan_pembayaran, minggu_ke_1, minggu_ke_2, minggu_ke_3, minggu_ke_4) VALUES ";
+		$dataSiswa = mysqli_query($conn, "SELECT * FROM anggota");
+		$anggota = "INSERT INTO uang_kas (id_anggota, id_bulan_pembayaran, minggu_ke_1, minggu_ke_2, minggu_ke_3, minggu_ke_4) VALUES ";
 		foreach ($dataSiswa as $ds) {
-		 	$siswa .= "('{$ds['id_siswa']}','{$id_bulan_pembayaran}','','','','')";
-            $siswa .= ",";
+		 	$anggota .= "('{$ds['id_anggota']}','{$id_bulan_pembayaran}','','','','')";
+            $anggota .= ",";
 		}
-		$siswa = rtrim($siswa,",");
-		$query_siswa = mysqli_query($conn, $siswa);
+		$anggota = rtrim($anggota,",");
+		$query_siswa = mysqli_query($conn, $anggota);
 	  	return mysqli_affected_rows($conn);
 	}
 }
@@ -301,9 +301,9 @@ function changePassword($data) {
 
 function tambahSiswaUangKas($data) {
 	global $conn;
-	$id_siswa = htmlspecialchars($data['id_siswa']);
+	$id_anggota = htmlspecialchars($data['id_anggota']);
 	$id_bulan_pembayaran = htmlspecialchars($data['id_bulan_pembayaran']);
-	$query = mysqli_query($conn, "INSERT INTO uang_kas VALUES ('', '$id_siswa', '$id_bulan_pembayaran', '0', '0', '0', '0', '0')");
+	$query = mysqli_query($conn, "INSERT INTO uang_kas VALUES ('', '$id_anggota', '$id_bulan_pembayaran', '0', '0', '0', '0', '0')");
   	return mysqli_affected_rows($conn);
 }
 

@@ -5,7 +5,7 @@
   if (isset($_POST['btnLaporanPemasukkan'])) {
   	$id_bulan_pembayaran = htmlspecialchars($_POST['id_bulan_pembayaran']);
 
-  	$sql = mysqli_query($conn, "SELECT * FROM bulan_pembayaran INNER JOIN uang_kas ON bulan_pembayaran.id_bulan_pembayaran = uang_kas.id_bulan_pembayaran INNER JOIN siswa ON uang_kas.id_siswa = siswa.id_siswa WHERE bulan_pembayaran.id_bulan_pembayaran = '$id_bulan_pembayaran'");
+  	$sql = mysqli_query($conn, "SELECT * FROM bulan_pembayaran INNER JOIN uang_kas ON bulan_pembayaran.id_bulan_pembayaran = uang_kas.id_bulan_pembayaran INNER JOIN anggota ON uang_kas.id_anggota = anggota.id_anggota WHERE bulan_pembayaran.id_bulan_pembayaran = '$id_bulan_pembayaran'");
   	$fetch_sql = mysqli_fetch_assoc($sql);
   }
   if (isset($_POST['btnLaporanPengeluaran'])) {
@@ -134,30 +134,30 @@
 												<?php foreach ($sql as $ds): ?>
 													<tr>
 														<td><?= $i++; ?></td>
-														<td><?= ucwords(htmlspecialchars_decode($ds['nama_siswa'])); ?></td>
+														<td><?= ucwords(htmlspecialchars_decode($ds['nama_anggota'])); ?></td>
 														<?php if ($ds['minggu_ke_1'] == $ds['pembayaran_perminggu']): ?>
-																		<td class="text-success"><?= number_format($ds['minggu_ke_1']); ?></td>
-																	<?php else: ?>
-																		<td class="text-danger"><?= number_format($ds['minggu_ke_1']); ?></td>
-																	<?php endif ?>
+															<td class="text-success"><?= number_format($ds['minggu_ke_1']); ?></td>
+														<?php else: ?>
+															<td class="text-danger"><?= number_format($ds['minggu_ke_1']); ?></td>
+														<?php endif ?>
 
-																	<?php if ($ds['minggu_ke_2'] == $ds['pembayaran_perminggu']): ?>
-																		<td class="text-success"><?= number_format($ds['minggu_ke_2']); ?></td>
-																	<?php else: ?>
-																		<td class="text-danger"><?= number_format($ds['minggu_ke_2']); ?></td>
-																	<?php endif ?>
+														<?php if ($ds['minggu_ke_2'] == $ds['pembayaran_perminggu']): ?>
+															<td class="text-success"><?= number_format($ds['minggu_ke_2']); ?></td>
+														<?php else: ?>
+															<td class="text-danger"><?= number_format($ds['minggu_ke_2']); ?></td>
+														<?php endif ?>
 
-																	<?php if ($ds['minggu_ke_3'] == $ds['pembayaran_perminggu']): ?>
-																		<td class="text-success"><?= number_format($ds['minggu_ke_3']); ?></td>
-																	<?php else: ?>
-																		<td class="text-danger"><?= number_format($ds['minggu_ke_3']); ?></td>
-																	<?php endif ?>
+														<?php if ($ds['minggu_ke_3'] == $ds['pembayaran_perminggu']): ?>
+															<td class="text-success"><?= number_format($ds['minggu_ke_3']); ?></td>
+														<?php else: ?>
+															<td class="text-danger"><?= number_format($ds['minggu_ke_3']); ?></td>
+														<?php endif ?>
 
-																	<?php if ($ds['minggu_ke_4'] == $ds['pembayaran_perminggu']): ?>
-																		<td class="text-success"><?= number_format($ds['minggu_ke_4']); ?></td>
-																	<?php else: ?>
-																		<td class="text-danger"><?= number_format($ds['minggu_ke_4']); ?></td>
-																	<?php endif ?>
+														<?php if ($ds['minggu_ke_4'] == $ds['pembayaran_perminggu']): ?>
+															<td class="text-success"><?= number_format($ds['minggu_ke_4']); ?></td>
+														<?php else: ?>
+															<td class="text-danger"><?= number_format($ds['minggu_ke_4']); ?></td>
+														<?php endif ?>
 													</tr>
 												<?php endforeach ?>
 											</tbody>
@@ -166,13 +166,13 @@
 								</div>
 							</div>
 							<div class="row mx-1 mb-1 mt-0">
-							<div class="col-lg-4">
-								<?php 
-									$jml_uang_kas = mysqli_fetch_assoc(mysqli_query($conn, "SELECT *, sum(minggu_ke_1 + minggu_ke_2 + minggu_ke_3 + minggu_ke_4) as jml_uang_kas FROM uang_kas INNER JOIN bulan_pembayaran ON bulan_pembayaran.id_bulan_pembayaran = uang_kas.id_bulan_pembayaran WHERE bulan_pembayaran.id_bulan_pembayaran = '$id_bulan_pembayaran'"));
-								?>
-								<div class="p-3 rounded bg-success total">Total Pemasukkan: Rp. <?= number_format($jml_uang_kas['jml_uang_kas']); ?></div>
+								<div class="col-lg-4">
+									<?php 
+										$jml_uang_kas = mysqli_fetch_assoc(mysqli_query($conn, "SELECT *, SUM(minggu_ke_1 + minggu_ke_2 + minggu_ke_3 + minggu_ke_4) as jml_uang_kas FROM uang_kas INNER JOIN bulan_pembayaran ON bulan_pembayaran.id_bulan_pembayaran = uang_kas.id_bulan_pembayaran WHERE bulan_pembayaran.id_bulan_pembayaran = '$id_bulan_pembayaran'"));
+									?>
+									<div class="p-3 rounded bg-success total">Total Pemasukkan: Rp. <?= number_format($jml_uang_kas['jml_uang_kas']); ?></div>
+								</div>
 							</div>
-						</div>
 						<?php endif ?>
 						<?php if (isset($_POST['btnLaporanPengeluaran'])): ?>
 							<hr class="not-printed">
@@ -212,11 +212,11 @@
 									</div>
 								</div>
 							</div>
-						<div class="row mx-1 mb-1 mt-0">
-							<div class="col-lg-4">
-								<div class="p-3 rounded bg-success total">Total Pengeluaran: Rp. <?= number_format($total_pengeluaran); ?></div>
+							<div class="row mx-1 mb-1 mt-0">
+								<div class="col-lg-4">
+									<div class="p-3 rounded bg-success total">Total Pengeluaran: Rp. <?= number_format($total_pengeluaran); ?></div>
+								</div>
 							</div>
-						</div>
 						<?php endif ?>
 					</div>
 				</section>

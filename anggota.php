@@ -1,18 +1,18 @@
 <?php 
   require 'connection.php';
   checkLogin();
-  $siswa = mysqli_query($conn, "SELECT * FROM siswa ORDER BY nama_siswa ASC");
+  $anggota = mysqli_query($conn, "SELECT * FROM anggota ORDER BY nama_anggota ASC");
   if (isset($_POST['btnEditSiswa'])) {
     if (editSiswa($_POST) > 0) {
       setAlert("Siswa has been changed", "Successfully changed", "success");
-      header("Location: siswa.php");
+      header("Location: anggota.php");
     }
   }
 
   if (isset($_POST['btnTambahSiswa'])) {
     if (addSiswa($_POST) > 0) {
       setAlert("Siswa has been added", "Successfully added", "success");
-      header("Location: siswa.php");
+      header("Location: anggota.php");
     }
   }
   if (isset($_GET['toggle_modal'])) {
@@ -65,8 +65,8 @@
                           </div>
                           <div class="modal-body">
                             <div class="form-group">
-                              <label for="nama_siswa">Nama Siswa</label>
-                              <input type="text" id="nama_siswa" name="nama_siswa" class="form-control" required>
+                              <label for="nama_anggota">Nama Siswa</label>
+                              <input type="text" id="nama_anggota" name="nama_anggota" class="form-control" required>
                             </div>
                             <div class="form-group">
                               <label>Jenis Kelamin</label><br>
@@ -118,53 +118,53 @@
                     </thead>
                     <tbody>
                       <?php $i = 1; ?>
-                      <?php foreach ($siswa as $ds): ?>
+                      <?php foreach ($anggota as $ds): ?>
                         <tr>
                           <td><?= $i++; ?></td>
-                          <td><?= ucwords(htmlspecialchars_decode($ds['nama_siswa'])); ?></td>
+                          <td><?= ucwords(htmlspecialchars_decode($ds['nama_anggota'])); ?></td>
                           <td><?= ucwords($ds['jenis_kelamin']); ?></td>
                           <td><?= $ds['no_telepon']; ?></td>
                           <td><?= $ds['email']; ?></td>
                           <?php if ($_SESSION['id_jabatan'] !== '3'): ?>
                             <td>
                               <!-- Button trigger modal -->
-                              <a href="ubah_siswa.php?id_siswa=<?= $ds['id_siswa']; ?>" class="badge badge-success" data-toggle="modal" data-target="#editSiswa<?= $ds['id_siswa']; ?>">
+                              <a href="ubah_siswa.php?id_anggota=<?= $ds['id_anggota']; ?>" class="badge badge-success" data-toggle="modal" data-target="#editSiswa<?= $ds['id_anggota']; ?>">
                                 <i class="fas fa-fw fa-edit"></i> Ubah
                               </a>
                               <!-- Modal -->
-                              <div class="modal fade" id="editSiswa<?= $ds['id_siswa']; ?>" tabindex="-1" role="dialog" aria-labelledby="editSiswa<?= $ds['id_siswa']; ?>" aria-hidden="true">
+                              <div class="modal fade" id="editSiswa<?= $ds['id_anggota']; ?>" tabindex="-1" role="dialog" aria-labelledby="editSiswa<?= $ds['id_anggota']; ?>" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                   <form method="post">
-                                    <input type="hidden" name="id_siswa" value="<?= $ds['id_siswa']; ?>">
+                                    <input type="hidden" name="id_anggota" value="<?= $ds['id_anggota']; ?>">
                                     <div class="modal-content">
                                       <div class="modal-header">
-                                        <h5 class="modal-title" id="editSiswaModalLabel<?= $ds['id_siswa']; ?>">Ubah Siswa</h5>
+                                        <h5 class="modal-title" id="editSiswaModalLabel<?= $ds['id_anggota']; ?>">Ubah Siswa</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                         </button>
                                       </div>
                                       <div class="modal-body">
                                         <div class="form-group">
-                                          <label for="nama_siswa<?= $ds['id_siswa']; ?>">Nama Siswa</label>
-                                          <input type="text" id="nama_siswa<?= $ds['id_siswa']; ?>" value="<?= $ds['nama_siswa']; ?>" name="nama_siswa" class="form-control" required>
+                                          <label for="nama_anggota<?= $ds['id_anggota']; ?>">Nama Siswa</label>
+                                          <input type="text" id="nama_anggota<?= $ds['id_anggota']; ?>" value="<?= $ds['nama_anggota']; ?>" name="nama_anggota" class="form-control" required>
                                         </div>
                                         <div class="form-group">
                                           <label>Jenis Kelamin</label><br>
                                           <?php if ($ds['jenis_kelamin'] == 'pria'): ?>
-                                            <input type="radio" id="pria<?= $ds['id_siswa']; ?>" name="jenis_kelamin" value="pria" checked="checked"> <label for="pria<?= $ds['id_siswa']; ?>">Pria</label> |
-                                            <input type="radio" id="wanita<?= $ds['id_siswa']; ?>" name="jenis_kelamin" value="wanita"> <label for="wanita<?= $ds['id_siswa']; ?>">Wanita</label>
+                                            <input type="radio" id="pria<?= $ds['id_anggota']; ?>" name="jenis_kelamin" value="pria" checked="checked"> <label for="pria<?= $ds['id_anggota']; ?>">Pria</label> |
+                                            <input type="radio" id="wanita<?= $ds['id_anggota']; ?>" name="jenis_kelamin" value="wanita"> <label for="wanita<?= $ds['id_anggota']; ?>">Wanita</label>
                                           <?php else: ?>
-                                            <input type="radio" id="pria<?= $ds['id_siswa']; ?>" name="jenis_kelamin" value="pria"> <label for="pria<?= $ds['id_siswa']; ?>">Pria</label> |
-                                            <input type="radio" id="wanita<?= $ds['id_siswa']; ?>" name="jenis_kelamin" value="wanita" checked="checked"> <label for="wanita<?= $ds['id_siswa']; ?>">Wanita</label>
+                                            <input type="radio" id="pria<?= $ds['id_anggota']; ?>" name="jenis_kelamin" value="pria"> <label for="pria<?= $ds['id_anggota']; ?>">Pria</label> |
+                                            <input type="radio" id="wanita<?= $ds['id_anggota']; ?>" name="jenis_kelamin" value="wanita" checked="checked"> <label for="wanita<?= $ds['id_anggota']; ?>">Wanita</label>
                                           <?php endif ?>
                                         </div>
                                         <div class="form-group">
-                                          <label for="no_telepon<?= $ds['id_siswa']; ?>">No. Telepon</label>
-                                          <input type="number" name="no_telepon" value="<?= $ds['no_telepon']; ?>" id="no_telepon<?= $ds['id_siswa']; ?>" class="form-control">
+                                          <label for="no_telepon<?= $ds['id_anggota']; ?>">No. Telepon</label>
+                                          <input type="number" name="no_telepon" value="<?= $ds['no_telepon']; ?>" id="no_telepon<?= $ds['id_anggota']; ?>" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                          <label for="email<?= $ds['id_siswa']; ?>">Email</label>
-                                          <input type="email" name="email" value="<?= $ds['email']; ?>" id="email<?= $ds['id_siswa']; ?>" class="form-control">
+                                          <label for="email<?= $ds['id_anggota']; ?>">Email</label>
+                                          <input type="email" name="email" value="<?= $ds['email']; ?>" id="email<?= $ds['id_anggota']; ?>" class="form-control">
                                         </div>
                                       </div>
                                       <div class="modal-footer">
@@ -176,7 +176,7 @@
                                 </div>
                               </div>
                               <?php if ($_SESSION['id_jabatan'] == '1'): ?>
-                                <a data-nama="<?= $ds['nama_siswa']; ?>" class="btn-delete badge badge-danger" href="hapus_siswa.php?id_siswa=<?= $ds['id_siswa']; ?>"><i class="fas fa-fw fa-trash"></i> Hapus</a>
+                                <a data-nama="<?= $ds['nama_anggota']; ?>" class="btn-delete badge badge-danger" href="hapus_siswa.php?id_anggota=<?= $ds['id_anggota']; ?>"><i class="fas fa-fw fa-trash"></i> Hapus</a>
                               <?php endif ?>
                             </td>
                           <?php endif ?>

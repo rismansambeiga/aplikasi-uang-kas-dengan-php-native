@@ -16,7 +16,6 @@
       header("Location: pengeluaran.php");
     }
   }
-
 ?>
 
 <!DOCTYPE html>

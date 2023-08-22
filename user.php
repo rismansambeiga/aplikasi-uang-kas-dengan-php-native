@@ -153,7 +153,7 @@
                                         <div class="form-group">
                                           <label for="id_jabatan<?= $du['id_user']; ?>">Nama Jabatan</label>
                                           <select name="id_jabatan" class="form-control" id="id_jabatan<?= $du['id_user']; ?>">
-                                              <option value="<?= $du['id_jabatan']; ?>"><?= $du['nama_jabatan']; ?></option>
+                                            <option value="<?= $du['id_jabatan']; ?>"><?= $du['nama_jabatan']; ?></option>
                                             <?php foreach ($jabatan as $dj): ?>
                                               <?php if ($dj['id_jabatan'] !== '1'): ?>
                                                 <?php if ($du['id_jabatan'] !== $dj['id_jabatan']): ?>

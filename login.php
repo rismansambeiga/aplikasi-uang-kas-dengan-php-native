@@ -67,7 +67,7 @@
 							<label for="password"><i class="fas fa-fw fa-lock"></i> Password</label>
 							<input required class="form-control rounded-pill" type="password" name="password" id="password">
 						</div>
-						<div class="form-group text-right">
+						<div class="form-group text-left">
 							<button class="btn btn-success rounded-pill" type="submit" name="btnLogin"><i class="fas fa-fw fa-sign-in-alt"></i> Login</button>
 						</div>
 					</form>

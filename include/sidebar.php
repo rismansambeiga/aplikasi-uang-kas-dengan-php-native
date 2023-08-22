@@ -59,7 +59,7 @@
           </li>
         <?php endif ?>
         <li class="nav-item">
-          <a href="siswa.php" class="nav-link">
+          <a href="anggota.php" class="nav-link">
             <i class="fas fa-user-tie nav-icon"></i>
             <p>Siswa</p>
           </a>

@@ -3,9 +3,9 @@
   checkLogin();
   $id_bulan_pembayaran = $_GET['id_bulan_pembayaran'];
   $detail_bulan_pembayaran = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM bulan_pembayaran WHERE id_bulan_pembayaran = '$id_bulan_pembayaran'"));
-  $siswa = mysqli_query($conn, "SELECT * FROM siswa ORDER BY nama_siswa ASC");
-  $siswa_baru = mysqli_query($conn, "SELECT * FROM siswa WHERE id_siswa NOT IN (SELECT id_siswa FROM uang_kas) ORDER BY nama_siswa ASC");
-  $uang_kas = mysqli_query($conn, "SELECT * FROM uang_kas INNER JOIN siswa ON uang_kas.id_siswa = siswa.id_siswa INNER JOIN bulan_pembayaran ON uang_kas.id_bulan_pembayaran = bulan_pembayaran.id_bulan_pembayaran WHERE uang_kas.id_bulan_pembayaran = '$id_bulan_pembayaran' ORDER BY nama_siswa ASC");
+  $anggota = mysqli_query($conn, "SELECT * FROM anggota ORDER BY nama_anggota ASC");
+  $siswa_baru = mysqli_query($conn, "SELECT * FROM anggota WHERE id_anggota NOT IN (SELECT id_anggota FROM uang_kas) ORDER BY nama_anggota ASC");
+  $uang_kas = mysqli_query($conn, "SELECT * FROM uang_kas INNER JOIN anggota ON uang_kas.id_anggota = anggota.id_anggota INNER JOIN bulan_pembayaran ON uang_kas.id_bulan_pembayaran = bulan_pembayaran.id_bulan_pembayaran WHERE uang_kas.id_bulan_pembayaran = '$id_bulan_pembayaran' ORDER BY nama_anggota ASC");
   
   $bulan_pembayaran_pertama = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM bulan_pembayaran ORDER BY id_bulan_pembayaran ASC LIMIT 1")); 
   $id_bulan_pembayaran_pertama = $bulan_pembayaran_pertama['id_bulan_pembayaran'];
@@ -16,7 +16,7 @@
   }
 
   if ($id_bulan_pembayaran != $id_bulan_pembayaran_pertama) {
-    $uang_kas_bulan_sebelum = mysqli_query($conn, "SELECT * FROM uang_kas INNER JOIN siswa ON uang_kas.id_siswa = siswa.id_siswa INNER JOIN bulan_pembayaran ON uang_kas.id_bulan_pembayaran = bulan_pembayaran.id_bulan_pembayaran WHERE uang_kas.id_bulan_pembayaran = $id_bulan_pembayaran_sebelum ORDER BY nama_siswa ASC");
+    $uang_kas_bulan_sebelum = mysqli_query($conn, "SELECT * FROM uang_kas INNER JOIN anggota ON uang_kas.id_anggota = anggota.id_anggota INNER JOIN bulan_pembayaran ON uang_kas.id_bulan_pembayaran = bulan_pembayaran.id_bulan_pembayaran WHERE uang_kas.id_bulan_pembayaran = $id_bulan_pembayaran_sebelum ORDER BY nama_anggota ASC");
   }
 
   if (isset($_POST['btnEditPembayaranUangKas'])) {
@@ -99,7 +99,7 @@
                 <?php if ($_SESSION['id_jabatan'] == '3'): ?>
                   <tr>
                     <td><?= $i++; ?></td>
-                    <td><?= ucwords(htmlspecialchars_decode($duk['nama_siswa'])); ?></td>
+                    <td><?= ucwords(htmlspecialchars_decode($duk['nama_anggota'])); ?></td>
                     <?php if ($duk['minggu_ke_1'] == $duk['pembayaran_perminggu']): ?>
                       <td class="text-success"><?= number_format($duk['minggu_ke_1']); ?></td>
                     <?php else: ?>
@@ -131,7 +131,7 @@
                     <tr>
                   <?php endif ?>
                     <td><?= $i++; ?></td>
-                    <td><?= $duk['nama_siswa']; ?></td>
+                    <td><?= $duk['nama_anggota']; ?></td>
                     <?php if ($duk['minggu_ke_1'] == $duk['pembayaran_perminggu']): ?>
                       <?php if ($duk['minggu_ke_2'] !== "0"): ?>
                         <td>
@@ -199,7 +199,7 @@
                         <input type="hidden" name="id_uang_kas" value="<?= $duk['id_uang_kas']; ?>">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="editMingguKe1Label<?= $dbp['id_bulan_pembayaran']; ?>">Ubah Minggu Ke-1 : <?= $duk['nama_siswa']; ?></h5>
+                            <h5 class="modal-title" id="editMingguKe1Label<?= $dbp['id_bulan_pembayaran']; ?>">Ubah Minggu Ke-1 : <?= $duk['nama_anggota']; ?></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -226,7 +226,7 @@
                         <input type="hidden" name="id_uang_kas" value="<?= $duk['id_uang_kas']; ?>">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="editMingguKe2Label<?= $dbp['id_bulan_pembayaran']; ?>">Ubah Minggu Ke-2 : <?= $duk['nama_siswa']; ?></h5>
+                            <h5 class="modal-title" id="editMingguKe2Label<?= $dbp['id_bulan_pembayaran']; ?>">Ubah Minggu Ke-2 : <?= $duk['nama_anggota']; ?></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -253,7 +253,7 @@
                         <input type="hidden" name="id_uang_kas" value="<?= $duk['id_uang_kas']; ?>">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="editMingguKe3Label<?= $dbp['id_bulan_pembayaran']; ?>">Ubah Minggu Ke-3 : <?= $duk['nama_siswa']; ?></h5>
+                            <h5 class="modal-title" id="editMingguKe3Label<?= $dbp['id_bulan_pembayaran']; ?>">Ubah Minggu Ke-3 : <?= $duk['nama_anggota']; ?></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -281,7 +281,7 @@
                         <input type="hidden" name="pembayaran_perminggu" value="<?= $duk['pembayaran_perminggu']; ?>">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="editMingguKe4Label<?= $dbp['id_bulan_pembayaran']; ?>">Ubah Minggu Ke-4 : <?= $duk['nama_siswa']; ?></h5>
+                            <h5 class="modal-title" id="editMingguKe4Label<?= $dbp['id_bulan_pembayaran']; ?>">Ubah Minggu Ke-4 : <?= $duk['nama_anggota']; ?></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -324,13 +324,13 @@
           </div>
           <div class="modal-body">
             <div class="form-group">
-              <label for="id_siswa">Nama Siswa</label>
-              <select name="id_siswa" id="id_siswa" class="form-control">
+              <label for="id_anggota">Nama Siswa</label>
+              <select name="id_anggota" id="id_anggota" class="form-control">
                 <?php foreach ($siswa_baru as $dsb): ?>
-                  <option value="<?= $dsb['id_siswa']; ?>"><?= $dsb['nama_siswa']; ?></option>
+                  <option value="<?= $dsb['id_anggota']; ?>"><?= $dsb['nama_anggota']; ?></option>
                 <?php endforeach ?>
               </select>
-              <a href="siswa.php?toggle_modal=tambahSiswaModal">Tidak ada nama siswa diatas? Tambahkan siswa disini!</a>
+              <a href="anggota.php?toggle_modal=tambahSiswaModal">Tidak ada nama anggota diatas? Tambahkan anggota disini!</a>
             </div>
           </div>
           <div class="modal-footer">
