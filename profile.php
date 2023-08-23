@@ -70,7 +70,7 @@
 						<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
 							<div class="modal-dialog" role="document">
 								<form method="post">
-												<input type="hidden" name="id_user" value="<?= $dataUser['id_user']; ?>">
+									<input type="hidden" name="id_user" value="<?= $dataUser['id_user']; ?>">
 									<div class="modal-content">
 										<div class="modal-header">
 											<h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
@@ -114,20 +114,20 @@
 												<span aria-hidden="true">&times;</span>
 											</button>
 										</div>
-											<div class="modal-body">
-												<div class="form-group">
-													<label for="old_password">Old Password</label>
-													<input type="password" minlength="6" name="old_password" id="old_password" class="form-control" required>
-												</div>
-												<div class="form-group">
-													<label for="new_password">Password</label>
-													<input type="password" minlength="6" name="new_password" id="new_password" class="form-control" required>
-												</div>
-												<div class="form-group">
-													<label for="new_password_verify">Password Verify</label>
-													<input type="password" minlength="6" name="new_password_verify" id="new_password_verify" class="form-control" required>
-												</div>
+										<div class="modal-body">
+											<div class="form-group">
+												<label for="old_password">Old Password</label>
+												<input type="password" minlength="6" name="old_password" id="old_password" class="form-control" required>
 											</div>
+											<div class="form-group">
+												<label for="new_password">Password</label>
+												<input type="password" minlength="6" name="new_password" id="new_password" class="form-control" required>
+											</div>
+											<div class="form-group">
+												<label for="new_password_verify">Password Verify</label>
+												<input type="password" minlength="6" name="new_password_verify" id="new_password_verify" class="form-control" required>
+											</div>
+										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-fw fa-times"></i> Close</button>
 											<button type="submit" name="btnChangePassword" class="btn btn-primary"><i class="fas fa-fw fa-save"></i> Save</button>
