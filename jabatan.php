@@ -2,6 +2,7 @@
   require 'connection.php';
   
   checkLogin();
+  timeOut();
 
   $jabatan = mysqli_query($conn, "SELECT * FROM jabatan");
   if (isset($_POST['btnEditJabatan'])) {

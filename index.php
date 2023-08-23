@@ -2,6 +2,7 @@
   require 'connection.php';
   
   checkLogin();
+  timeOut();
 
   $jml_siswa = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(id_anggota) as jml_siswa FROM anggota"));
   $jml_siswa = $jml_siswa['jml_siswa'];

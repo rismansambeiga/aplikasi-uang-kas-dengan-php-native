@@ -51,6 +51,32 @@ if (isset($_SESSION['alert'])) {
 	unset($_SESSION["alert"]);
 }
 
+function timeOut() {
+	// Set the inactivity time of 15 minutes (900 seconds)
+	$inactivity_time = 15 * 60;
+
+	// Check if the last_timestamp is set
+	// and last_timestamp is greater than 15 minutes or 900 seconds
+	if (isset($_SESSION['last_timestamp']) && (time() - $_SESSION['last_timestamp']) > $inactivity_time) {
+			// Display a JavaScript alert
+			echo '<script>alert("Your session has timed out. Please log in again.");</script>';
+
+			// Unset session variables and destroy session data
+			session_unset();
+			session_destroy();
+
+			// Redirect user to login page after the alert
+			echo '<script>window.location.href = "login.php";</script>';
+			exit();
+	} else {
+			// Regenerate new session ID and delete old one to prevent session fixation attack
+			session_regenerate_id(true);
+
+			// Update the last timestamp
+			$_SESSION['last_timestamp'] = time();
+	}
+}
+
 function checkLogin() {
 	if (!isset($_SESSION['id_user'])) {
 		setAlert("Access Denied!", "Login First!", "error");

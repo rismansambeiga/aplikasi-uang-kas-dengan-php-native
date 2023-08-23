@@ -2,6 +2,7 @@
   require 'connection.php';
   
   checkLogin();
+  timeOut();
   
   $pengeluaran = mysqli_query($conn, "SELECT * FROM pengeluaran INNER JOIN user ON pengeluaran.id_user = user.id_user");
 
