@@ -2,6 +2,7 @@
   require 'connection.php';
 
   checkLogin();
+  timeOut();
   
   $riwayat = mysqli_query($conn, "SELECT * FROM riwayat INNER JOIN user ON riwayat.id_user = user.id_user INNER JOIN uang_kas ON riwayat.id_uang_kas = uang_kas.id_uang_kas INNER JOIN anggota ON uang_kas.id_anggota = anggota.id_anggota INNER JOIN bulan_pembayaran ON uang_kas.id_bulan_pembayaran = bulan_pembayaran.id_bulan_pembayaran ORDER BY tanggal DESC");
 ?>

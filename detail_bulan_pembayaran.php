@@ -2,6 +2,7 @@
   require 'connection.php';
   
   checkLogin();
+  timeOut();
 
   $id_bulan_pembayaran = $_GET['id_bulan_pembayaran'];
   $detail_bulan_pembayaran = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM bulan_pembayaran WHERE id_bulan_pembayaran = '$id_bulan_pembayaran'"));

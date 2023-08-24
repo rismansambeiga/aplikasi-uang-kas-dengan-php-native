@@ -2,6 +2,7 @@
   require 'connection.php';
   
   checkLogin();
+  timeOut();
 
   $bulan_pembayaran = mysqli_query($conn, "SELECT * FROM bulan_pembayaran ORDER BY tahun ASC");
   if (isset($_POST['btnAddBulanPembayaran'])) {

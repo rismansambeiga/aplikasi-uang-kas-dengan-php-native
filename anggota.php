@@ -2,6 +2,7 @@
   require 'connection.php';
 
   checkLogin();
+  timeOut();
 
   $anggota = mysqli_query($conn, "SELECT * FROM anggota ORDER BY nama_anggota ASC");
   if (isset($_POST['btnEditSiswa'])) {
